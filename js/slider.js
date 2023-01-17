@@ -30,6 +30,12 @@ var toggleBtn = document.querySelector("#slider-toggle");
 
 var randomBtn = document.querySelector("#slider-random");
 
+var barreoutils = document.querySelector(".toolbar-toggle")
+
+var outilsBtn = document.querySelector(".toolbar-btn");
+
+var flecheBtn = document.querySelector(".bo-arrow")
+
 /*************************************************************************************************/
 /* ***************************************** FONCTIONS ***************************************** */
 /*************************************************************************************************/
@@ -54,13 +60,25 @@ function playImgSlider(){
 /*************************************************************************************************/
 playImgSlider();
 
-$(document).ready(function () {
-    $(".toolbar-toggle").click(function () {
-      $(".toolbar-btn").toggleClass("hidden");
-      $(".bo-arrow").toggleClass("fa-arrow-down");
-      $(".bo-arrow").toggleClass("fa-arrow-up");
-    });
-  });
+// $(document).ready(function () {
+//     $(".toolbar-toggle").click(function () {
+//       $(".toolbar-btn").toggleClass("hidden");
+//       $(".bo-arrow").toggleClass("fa-arrow-down");
+//       $(".bo-arrow").toggleClass("fa-arrow-up");
+//     });
+//   });
+
+barreoutils.addEventListener('click', function(){
+    if(outilsBtn.classList.contains('hidden')){
+        outilsBtn.classList.remove('hidden')
+        flecheBtn.classList.remove('fa-arrow-down')
+        flecheBtn.classList.add('fa-arrow-up')
+    }else{
+        outilsBtn.classList.add('hidden')
+        flecheBtn.classList.add('fa-arrow-down')
+        flecheBtn.classList.remove('fa-arrow-up')
+    }
+})
 
   document.addEventListener('keydown', (e) =>{
     switch(e.key){

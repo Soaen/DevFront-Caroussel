@@ -36,6 +36,9 @@ var outilsBtn = document.querySelector(".toolbar-btn");
 
 var flecheBtn = document.querySelector(".bo-arrow")
 
+let container = document.querySelector(".dot-container")
+
+let slidersBtn = document.querySelector("button")
 /*************************************************************************************************/
 /* ***************************************** FONCTIONS ***************************************** */
 /*************************************************************************************************/
@@ -43,6 +46,8 @@ var flecheBtn = document.querySelector(".bo-arrow")
 function playImgSlider(){
     timer = setInterval(function(){
         if(autoSlider){
+            $("."+nbImg).removeClass("active");
+
             if(nbImg == imagesSlider.length-1){
                 nbImg = 0;
             }else{
@@ -50,7 +55,8 @@ function playImgSlider(){
             }
             img.src = "images" + imagesSlider[nbImg][0]
             imgdesc.innerHTML = imagesSlider[nbImg][1]
-            
+            $("."+nbImg).addClass("active");
+
         }
     }, 2000)
 }
@@ -95,6 +101,7 @@ barreoutils.addEventListener('click', function(){
   })
 
 nextBtn.addEventListener('click', function(){
+    $("."+nbImg).removeClass("active");
     
     for (let i = 0; i < imagesSlider.length; i++) {
         let tempsrc = img.src
@@ -112,10 +119,12 @@ nextBtn.addEventListener('click', function(){
 
     img.src = "images" + imagesSlider[nbImg][0]
     imgdesc.innerHTML = imagesSlider[nbImg][1]
+    $('.'+nbImg).addClass("active")
+
 })
 
 previousBtn.addEventListener('click', function(){
-
+    $("."+nbImg).removeClass("active");
     for (let i = 0; i < imagesSlider.length; i++) {
         let tempsrc = img.src
         tempsrc = tempsrc.substring(tempsrc.lastIndexOf('/'))
@@ -125,7 +134,7 @@ previousBtn.addEventListener('click', function(){
         }
 
     }
-
+    
     if(nbImg == 0){
         nbImg = imagesSlider.length-1;
     }else{
@@ -134,6 +143,8 @@ previousBtn.addEventListener('click', function(){
 
     img.src = "images" + imagesSlider[nbImg][0]
     imgdesc.innerHTML = imagesSlider[nbImg][1]
+
+    $('.'+nbImg).addClass("active")
 })
 
 toggleBtn.addEventListener('click', function(){
@@ -153,4 +164,25 @@ randomBtn.addEventListener('click', function(){
     }
     img.src = "images" + imagesSlider[tempImg][0]
     imgdesc.innerHTML = imagesSlider[tempImg][1]
+    $("."+nbImg).removeClass("active");
+    nbImg = tempImg
+    $('.'+tempImg).addClass("active")
 })
+
+for (let i = 0; i < imagesSlider.length; i++) {
+    let article = document.createElement('button')
+    article.classList.add(i)
+    article.addEventListener('click', function(){
+        $("."+nbImg).removeClass("active");
+        nbImg = article.classList[0]
+        $('.'+article.classList).addClass("active")
+        img.src = "images" + imagesSlider[article.classList[0]][0]
+        imgdesc.innerHTML = imagesSlider[article.classList[0]][1]
+
+    })
+    article.classList.contains(0) ? article.classList.add('active') : null
+
+    container.append(article)
+}
+
+
